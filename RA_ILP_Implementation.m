@@ -1,4 +1,4 @@
-%DPP Resource Allocation with e2e constraints
+%DPP Resource Allocation with e2e constraints - Heuristic based implementation
 m=input('Enter the number of DPP services in the pipeline (default 3):');
 total_cost =0.0;
 reqE2ELatency=input('Enter end-to-end latency constraint value: ');
