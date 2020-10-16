@@ -11,10 +11,10 @@ minB = input('Enter the min QoS in service 3: ');
     tic;
     for k=1:m
         
-            %f=[0.0385,0.0385,0.0385,0.0385,0.0385,0.0928,0.0928,0.0928,0.0928,0.0928,0.1856,0.1856,0.1856,0.1856,0.1856];
-             f=[0.032,0.032,0.032,0.032,0.032,0.065,0.065,0.065,0.065,0.065,0.13,0.13,0.13,0.13,0.13]; % read workload vector for each service
-            sus_workload=[1000,5000,10000,20000,30000,1000,5000,10000,20000,30000,1000,5000,10000,20000,30000];
-            sus_qos=[8,11,14,22,29,7,9,10,13,18,5,7,8,10,12];
+            
+             f=[0.032,0.032,0.032,0.032,0.032,0.065,0.065,0.065,0.065,0.065,0.13,0.13,0.13,0.13,0.13]; % read cost vector for each service
+            sus_workload=[1000,5000,10000,20000,30000,1000,5000,10000,20000,30000,1000,5000,10000,20000,30000]; % read workload vector for each service
+            sus_qos=[8,11,14,22,29,7,9,10,13,18,5,7,8,10,12]; % read QoS vector for correpsonding workload vector in each service
             instance_type_list=["micro","micro","micro","micro","micro","small","small","small","small","small","medium","medium","medium","medium","medium"];
             
             %Assigning A and b in Ax <= b (inequality constraint)
@@ -62,28 +62,9 @@ minB = input('Enter the min QoS in service 3: ');
                 end
             end
             fprintf('total cost for S_%d: $%f\n', k, fval1);
-            reqQoS = reqQoS-max(qos_array1);
-            total_cost = total_cost+fval1;
-        
-        
-            %f1=[0.0385,0.0385,0.0385,0.0385,0.0385,0.0385,0.0385,0.0928,0.0928,0.0928,0.0928,0.0928,0.0928,0.0928,0.0928,0.1856,0.1856,0.1856,0.1856,0.1856,0.1856,0.1856,0.1856,0.1856,0.1856,0.1856,0.1856];
-            %f1=[0.032,0.032,0.032,0.032,0.032,0.032,0.032,0.065,0.065,0.065,0.065,0.065,0.065,0.065,0.065,0.13,0.13,0.13,0.13,0.13,0.13,0.13,0.13,0.13,0.13,0.13,0.13];
-            %sus_workload1=[1000,5000,10000,20000,30000,40000,50000,1000,5000,10000,20000,30000,40000,50000,60000,1000,5000,10000,20000,30000,40000,50000,60000,70000,80000,90000,100000];
-            %sus_qos1=[45,90,200,400,600,800,900,30,60,200,400,500,600,800,900,25,50,100,200,250,350,450,500,600,700,800,900];
-            %instance_type_list1=["micro","micro","micro","micro","micro","micro","micro","small","small","small","small","small","small","small","small","medium","medium","medium","medium","medium","medium","medium","medium","medium","medium","medium","medium"];
-            
-            % for S3
-            
-            
-            %f2=[0.032,0.032,0.032,0.065,0.065,0.065,0.065,0.065,0.13,0.13,0.13,0.13,0.13,0.13,0.13];
-            %sus_workload2=[1000,5000,10000,1000,5000,10000,20000,30000,1000,5000,10000,20000,30000,40000,50000];
-            %sus_qos2=[2,20,260,1,2,6,40,140,1,1,2,4,9,25,120];
-            %instance_type_list2=["micro","micro","micro","small","small","small","small","small","medium","medium","medium","medium","medium","medium","medium"];
-            
-            %Assigning A and b in Ax <= b (inequality constraint)
-            
-       
-        
+            reqQoS = reqQoS-max(qos_array1);  % selects only maximum value of latency if heterogeneous instance type are used for resource allocation
+            total_cost = total_cost+fval1;         
+
     end
     toc;
     fprintf('Total cost of RA in DPP:$%f\n', total_cost);
